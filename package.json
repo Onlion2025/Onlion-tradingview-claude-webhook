@@ -1,0 +1,16 @@
+{
+  "name": "tradingview-claude-webhook",
+  "version": "1.0.0",
+  "description": "TradingView Webhook → Claude KI Trading Signals",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "@anthropic-ai/sdk": "^0.24.0"
+  }
+}
