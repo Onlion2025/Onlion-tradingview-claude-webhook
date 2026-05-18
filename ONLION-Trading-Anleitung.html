@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONLION Trading – Benutzeranleitung</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000;
+    --bg: #0A0A0A;
+    --bg2: #111;
+    --bg3: #1A1A1A;
+    --line: #2A2A2A;
+    --text: #BBBBBB;
+    --bright: #FFFFFF;
+    --green: #7FFF00;
+    --red: #FF3B3B;
+    --amber: #FFB020;
+    --bebas: 'Bebas Neue', sans-serif;
+    --sans: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--black); color: var(--text); font-family: var(--sans); line-height: 1.7; }
+
+  /* HEADER */
+  .header {
+    background: var(--black);
+    border-bottom: 2px solid var(--green);
+    padding: 24px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-family: var(--bebas); font-size: 32px; letter-spacing: .12em; }
+  .logo span { color: var(--green); }
+  .logo-sub { font-size: 11px; color: var(--text); letter-spacing: .2em; text-transform: uppercase; margin-top: 2px; }
+  .header-badge {
+    background: var(--green); color: var(--black);
+    font-family: var(--bebas); font-size: 13px; letter-spacing: .1em;
+    padding: 6px 14px; border-radius: 4px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--line);
+    padding: 48px 40px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'TRADING';
+    position: absolute; right: -20px; top: -20px;
+    font-family: var(--bebas); font-size: 180px; color: rgba(127,255,0,.03);
+    letter-spacing: .1em; pointer-events: none;
+  }
+  .hero-tag { font-size: 11px; color: var(--green); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 12px; }
+  .hero-title { font-family: var(--bebas); font-size: 52px; color: var(--bright); letter-spacing: .08em; line-height: 1; margin-bottom: 8px; }
+  .hero-title span { color: var(--green); }
+  .hero-sub { font-size: 15px; color: var(--text); max-width: 500px; margin-bottom: 24px; }
+  .hero-url {
+    display: inline-block;
+    background: var(--bg3); border: 1px solid var(--green);
+    border-radius: 6px; padding: 10px 20px;
+    font-family: monospace; font-size: 16px; color: var(--green);
+    letter-spacing: .05em;
+  }
+
+  /* CONTENT */
+  .content { max-width: 860px; margin: 0 auto; padding: 48px 40px; }
+
+  /* SECTION */
+  .section { margin-bottom: 48px; }
+  .section-tag { font-size: 10px; color: var(--green); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 6px; }
+  .section-title { font-family: var(--bebas); font-size: 32px; color: var(--bright); letter-spacing: .08em; margin-bottom: 16px; border-left: 3px solid var(--green); padding-left: 14px; }
+  .section p { font-size: 14px; color: var(--text); margin-bottom: 12px; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 12px; }
+  .step {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--bg2); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px;
+  }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 6px;
+    background: var(--green); color: var(--black);
+    font-family: var(--bebas); font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-body { flex: 1; }
+  .step-title { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 4px; }
+  .step-desc { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .step-desc code {
+    background: var(--bg3); border: 1px solid var(--line);
+    padding: 1px 6px; border-radius: 3px;
+    font-size: 12px; color: var(--green);
+  }
+
+  /* FIELD GRID */
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+  .field-card {
+    background: var(--bg2); border: 1px solid var(--line);
+    border-radius: 8px; padding: 12px 14px;
+  }
+  .field-name { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+  .field-desc { font-size: 12px; color: var(--text); }
+
+  /* SIGNAL BOXES */
+  .signal-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 16px 0; }
+  .sig-box { border-radius: 8px; padding: 14px; text-align: center; border: 1px solid; }
+  .sig-long { background: rgba(127,255,0,.08); border-color: var(--green); }
+  .sig-short { background: rgba(255,59,59,.08); border-color: var(--red); }
+  .sig-wait { background: rgba(255,176,32,.08); border-color: var(--amber); }
+  .sig-label { font-family: var(--bebas); font-size: 24px; letter-spacing: .1em; }
+  .sig-long .sig-label { color: var(--green); }
+  .sig-short .sig-label { color: var(--red); }
+  .sig-wait .sig-label { color: var(--amber); }
+  .sig-desc { font-size: 11px; color: var(--text); margin-top: 4px; }
+
+  /* INFO BOX */
+  .info-box {
+    background: var(--bg2);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px; margin: 16px 0;
+    font-size: 13px; color: var(--text);
+  }
+  .info-box strong { color: var(--bright); }
+  .warn-box {
+    background: rgba(255,176,32,.06);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px; margin: 16px 0;
+    font-size: 13px; color: var(--text);
+  }
+  .warn-box strong { color: var(--amber); }
+
+  /* LEVELS TABLE */
+  .levels-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .levels-table th { background: var(--bg3); color: var(--green); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+  .levels-table td { padding: 10px 12px; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--line); }
+  .levels-table tr:last-child td { border-bottom: none; }
+  .levels-table td:first-child { color: var(--bright); font-weight: 600; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .faq-q { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 6px; }
+  .faq-a { font-size: 13px; color: var(--text); }
+
+  /* FOOTER */
+  .footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--line);
+    padding: 32px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo { font-family: var(--bebas); font-size: 20px; letter-spacing: .12em; }
+  .footer-logo span { color: var(--green); }
+  .footer-text { font-size: 11px; color: var(--muted); letter-spacing: .08em; }
+  .disclaimer { font-size: 10px; color: #444; max-width: 500px; line-height: 1.6; }
+
+  @media (max-width: 600px) {
+    .header, .hero, .content, .footer { padding-left: 20px; padding-right: 20px; }
+    .hero-title { font-size: 36px; }
+    .field-grid, .signal-grid { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; }
+  }
+
+  @media print {
+    body { background: white; color: #111; }
+    .header { background: white; border-bottom: 2px solid #000; }
+    .logo span, .green { color: #000; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="logo">ON<span>LI</span>ON <span style="font-size:18px;color:#fff">TRADING</span></div>
+    <div class="logo-sub">KI-Automatisierung · Digitale Lösungen</div>
+  </div>
+  <div class="header-badge">BENUTZERANLEITUNG</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">▸ Powered by Claude KI</div>
+  <div class="hero-title">DEIN KI<br><span>TRADING SIGNAL</span></div>
+  <div class="hero-sub">Vollautomatische Chartanalyse mit künstlicher Intelligenz. Einstieg, Stop-Loss und Take-Profit in Sekunden.</div>
+  <div class="hero-url">🌐 onlion-trading.netlify.app</div>
+</div>
+
+<div class="content">
+
+  <!-- WAS IST DAS -->
+  <div class="section">
+    <div class="section-tag">Übersicht</div>
+    <div class="section-title">Was ist ONLION Trading?</div>
+    <p>ONLION Trading ist ein KI-gestütztes Signal-Dashboard das dir bei jedem Trade eine professionelle Analyse liefert. Gib einfach die wichtigsten Marktdaten ein und die künstliche Intelligenz berechnet dir sofort ein klares Signal mit allen wichtigen Levels.</p>
+    <p>Die App läuft direkt im Browser – keine Installation, kein Login. Einfach den Link öffnen und loslegen.</p>
+    <div class="info-box">
+      <strong>Für alle nutzbar:</strong> Teile einfach den Link <strong>onlion-trading.netlify.app</strong> – jeder kann die App sofort auf dem Handy oder Desktop nutzen.
+    </div>
+  </div>
+
+  <!-- APP ÖFFNEN -->
+  <div class="section">
+    <div class="section-tag">Schritt für Schritt</div>
+    <div class="section-title">So nutzt du die App</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">App öffnen</div>
+          <div class="step-desc">Öffne <code>onlion-trading.netlify.app</code> im Browser deines Handys oder Computers. Keine Registrierung nötig.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Symbol eingeben</div>
+          <div class="step-desc">Trage oben das Asset ein das du traden möchtest. Beispiele: <code>BTC/USD</code> · <code>AAPL</code> · <code>EUR/USD</code> · <code>GOLD</code></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Timeframe wählen</div>
+          <div class="step-desc">Wähle den Zeitrahmen deines Charts: <code>5m</code> · <code>15m</code> · <code>1h</code> · <code>4h</code> · <code>1d</code></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Marktdaten eintragen</div>
+          <div class="step-desc">Trage die aktuellen Werte aus TradingView ein: Kurs, Support-Level, Widerstand, RSI, dein Kapital und dein Risiko pro Trade.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">Trend auswählen</div>
+          <div class="step-desc">Wähle den übergeordneten Trend: <code>▲ BULLISH</code> · <code>– NEUTRAL</code> · <code>▼ BEARISH</code></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <div class="step-title">Signal berechnen</div>
+          <div class="step-desc">Klick auf <code>▶ SIGNAL BERECHNEN</code> – die KI analysiert innerhalb von Sekunden und gibt dir ein klares Ergebnis.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FELDER ERKLÄRUNG -->
+  <div class="section">
+    <div class="section-tag">Eingaben</div>
+    <div class="section-title">Was bedeuten die Felder?</div>
+    <div class="field-grid">
+      <div class="field-card">
+        <div class="field-name">Kurs $</div>
+        <div class="field-desc">Der aktuelle Marktpreis des Assets. Direkt aus TradingView ablesen.</div>
+      </div>
+      <div class="field-card">
+        <div class="field-name">Support $</div>
+        <div class="field-desc">Das nächste wichtige Unterstützungsniveau – wo der Kurs Halt findet.</div>
+      </div>
+      <div class="field-card">
+        <div class="field-name">Widerstand $</div>
+        <div class="field-desc">Das nächste wichtige Widerstandsniveau – wo der Kurs auf Verkaufsdruck trifft.</div>
+      </div>
+      <div class="field-card">
+        <div class="field-name">RSI</div>
+        <div class="field-desc">Relative Strength Index (0–100). Unter 30 = überverkauft, über 70 = überkauft.</div>
+      </div>
+      <div class="field-card">
+        <div class="field-name">Kapital $</div>
+        <div class="field-desc">Dein gesamtes Handelskapital. Wird für die Positionsgrößen-Berechnung verwendet.</div>
+      </div>
+      <div class="field-card">
+        <div class="field-name">Risiko %</div>
+        <div class="field-desc">Wie viel Prozent deines Kapitals du pro Trade riskieren möchtest. Empfehlung: 1–2%.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNALE VERSTEHEN -->
+  <div class="section">
+    <div class="section-tag">Ergebnis</div>
+    <div class="section-title">Die drei Signale verstehen</div>
+    <div class="signal-grid">
+      <div class="sig-box sig-long">
+        <div class="sig-label">▲ LONG</div>
+        <div class="sig-desc">Kaufsignal – die KI erwartet steigende Kurse. Einstieg auf der Long-Seite.</div>
+      </div>
+      <div class="sig-box sig-short">
+        <div class="sig-label">▼ SHORT</div>
+        <div class="sig-desc">Verkaufssignal – die KI erwartet fallende Kurse. Einstieg auf der Short-Seite.</div>
+      </div>
+      <div class="sig-box sig-wait">
+        <div class="sig-label">◆ WARTEN</div>
+        <div class="sig-desc">Kein klares Setup – abwarten und auf bessere Bedingungen warten.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVELS ERKLÄRUNG -->
+  <div class="section">
+    <div class="section-tag">Ausgabe</div>
+    <div class="section-title">Die berechneten Levels</div>
+    <table class="levels-table">
+      <tr><th>Level</th><th>Bedeutung</th><th>Empfehlung</th></tr>
+      <tr><td>Einstieg</td><td>Der optimale Einstiegskurs für den Trade</td><td>Als Limit-Order setzen</td></tr>
+      <tr><td>Stop-Loss</td><td>Maximaler Verlustpunkt – hier wird der Trade geschlossen</td><td>Immer setzen – keine Ausnahme!</td></tr>
+      <tr><td>Take-Profit 1</td><td>Erstes Gewinnziel</td><td>50% der Position schließen</td></tr>
+      <tr><td>Take-Profit 2</td><td>Zweites, weiteres Gewinnziel</td><td>Restliche 50% schließen</td></tr>
+      <tr><td>Positionsgröße</td><td>Empfohlener Betrag basierend auf Kapital & Risiko</td><td>Nie überschreiten</td></tr>
+      <tr><td>Risk/Reward</td><td>Verhältnis von Risiko zu möglichem Gewinn</td><td>Mindestens 2:1 anstreben</td></tr>
+    </table>
+    <div class="info-box">
+      <strong>Konfidenz %:</strong> Der Ring oben rechts zeigt wie sicher die KI in ihrer Einschätzung ist. Unter 60% lieber abwarten oder manuell prüfen.
+    </div>
+  </div>
+
+  <!-- TIPPS -->
+  <div class="section">
+    <div class="section-tag">Tipps</div>
+    <div class="section-title">Best Practices</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:transparent;border:1px solid var(--green);color:var(--green)">✓</div>
+        <div class="step-body">
+          <div class="step-title">Immer Stop-Loss setzen</div>
+          <div class="step-desc">Niemals ohne Stop-Loss traden. Der berechnete Stop-Loss basiert auf der Marktstruktur – respektiere ihn.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:transparent;border:1px solid var(--green);color:var(--green)">✓</div>
+        <div class="step-body">
+          <div class="step-title">Risk/Reward beachten</div>
+          <div class="step-desc">Nur Trades eingehen bei denen das Risk/Reward Verhältnis mindestens 2:1 beträgt. Lieber weniger Trades, dafür bessere.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:transparent;border:1px solid var(--green);color:var(--green)">✓</div>
+        <div class="step-body">
+          <div class="step-title">Mehrere Timeframes prüfen</div>
+          <div class="step-desc">Analysiere dasselbe Asset auf verschiedenen Timeframes. Ein Signal das auf 1h und 4h übereinstimmt ist stärker.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:transparent;border:1px solid var(--green);color:var(--green)">✓</div>
+        <div class="step-body">
+          <div class="step-title">Risiko maximal 2% pro Trade</div>
+          <div class="step-desc">Setze das Risiko-Feld nie über 2%. So überlebst du auch eine Verlustserie ohne das Konto zu gefährden.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section">
+    <div class="section-tag">Häufige Fragen</div>
+    <div class="section-title">FAQ</div>
+    <div class="faq-item">
+      <div class="faq-q">Kann ich die App auf dem Handy nutzen?</div>
+      <div class="faq-a">Ja! Die App ist vollständig für Handy optimiert. Öffne onlion-trading.netlify.app im Browser und füge sie als Lesezeichen zum Homescreen hinzu – dann sieht sie aus wie eine native App.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie viele Personen können die App gleichzeitig nutzen?</div>
+      <div class="faq-a">Unbegrenzt viele. Jeder der den Link hat kann die App öffnen und nutzen. Die KI-Analysen werden pro Anfrage berechnet.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Funktioniert die App für alle Assets?</div>
+      <div class="faq-a">Ja – Krypto (BTC, ETH...), Aktien (AAPL, TSLA...), Forex (EUR/USD...), Rohstoffe (GOLD, OIL...) und alle anderen handelbaren Instrumente.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie genau ist die KI-Analyse?</div>
+      <div class="faq-a">Die KI analysiert die eingegebenen technischen Daten und gibt eine fundierte Einschätzung. Die Konfidenz-Anzeige zeigt die Sicherheit. Dennoch: Kein Signal ist 100% sicher – eigene Analyse bleibt wichtig.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Was kostet die Nutzung?</div>
+      <div class="faq-a">Die App ist für Nutzer komplett kostenlos. Jede KI-Analyse kostet ca. $0.01 – diese Kosten trägt ONLION.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Werden meine Daten gespeichert?</div>
+      <div class="faq-a">Nein. Alle eingegebenen Daten (Kurse, Kapital, etc.) bleiben lokal in deinem Browser. Es werden keine persönlichen Daten gespeichert oder übertragen.</div>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="warn-box">
+    <strong>⚠ Risikohinweis:</strong> Diese App dient ausschließlich zu Informationszwecken und stellt keine Finanzberatung dar. Trading birgt erhebliche Risiken – du kannst dein gesamtes eingesetztes Kapital verlieren. Die KI-Signale sind keine Garantie für Gewinne. Handle nur mit Kapital das du bereit bist zu verlieren. ONLION übernimmt keine Haftung für Handelsentscheidungen die auf Basis dieser App getroffen werden.
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <div class="footer-logo">ON<span>LI</span>ON TRADING</div>
+    <div style="font-size:11px;color:#444;margin-top:4px;letter-spacing:.06em">DIGITALE LÖSUNGEN · KI-AUTOMATISIERUNG · MESSBARE ERGEBNISSE</div>
+  </div>
+  <div style="text-align:right">
+    <div style="font-size:13px;color:var(--green);font-family:monospace">onlion-trading.netlify.app</div>
+    <div style="font-size:11px;color:#444;margin-top:2px">Powered by Claude AI · ONLION © 2026</div>
+  </div>
+</div>
+
+</body>
+</html>
